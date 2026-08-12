@@ -1,0 +1,12 @@
+{
+  "name": "royal-poker-live",
+  "version": "1.0.0",
+  "description": "Royal Poker Live – Social Poker Game",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  }
+}
