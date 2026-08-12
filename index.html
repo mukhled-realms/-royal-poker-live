@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Royal Poker Live</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Inter:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        body {
+            background: #0b0719;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            padding: 10px;
+        }
+        .phone {
+            max-width: 420px;
+            width: 100%;
+            background: radial-gradient(circle at 50% 0%, #1e1340, #0a0718 80%);
+            border-radius: 36px;
+            border: 2px solid #3b2a6b;
+            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.9), inset 0 0 60px rgba(139,92,246,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 16px 12px 16px;
+            position: relative;
+            min-height: 780px;
+        }
+        .gold-text { color: #fbbf24; }
+        .gold-border { border-color: #fbbf24; }
+        .bg-glass { background: rgba(16,8,36,0.7); backdrop-filter: blur(6px); }
+        .btn-gold {
+            background: linear-gradient(145deg, #fbbf24, #d97706);
+            color: #0b0719;
+            font-weight: 700;
+            border: none;
+            border-radius: 40px;
+            padding: 10px 20px;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #a16207;
+        }
+        .btn-gold:active { transform: translateY(2px); box-shadow: 0 2px 0 #a16207; }
+        .btn-dark {
+            background: #1f1545;
+            border: 1px solid #4b3a7a;
+            color: #cbd5e1;
+            border-radius: 40px;
+            padding: 10px 16px;
+            font-weight: 600;
+            transition: 0.15s;
+            cursor: pointer;
+        }
+        .btn-dark:active { background: #2a1d5a; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #2a1d5a; border: 2px solid #4b3a7a; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fbbf24; }
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, #a855f7, transparent);
+            opacity: 0.3;
+            animation: scanMove 4s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
+        .player-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #161035;
+            padding: 8px 14px;
+            border-radius: 14px;
+            border: 1px solid #2a1d4a;
+        }
+        .table-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #1a4a2a, #0d2a1a);
+            border: 6px solid #fbbf24;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(251,191,36,0.2);
+            margin: 12px auto;
+        }
+        .chip-stack { display: flex; gap: 6px; margin-top: 6px; }
+        .chip { width: 32px; height: 12px; border-radius: 30px; background: #fbbf24; border: 1px solid #b45309; }
+        .chip.red { background: #dc2626; border-color: #7f1d1d; }
+        .chip.blue { background: #3b82f6; border-color: #1e3a8a; }
+    </style>
+</head>
+<body>
+<div class="phone">
+    <div class="scan-line"></div>
+
+    <!-- ========== HEADER ========== -->
+    <header class="flex justify-between items-center bg-glass p-3 rounded-2xl border border-[#32235c]">
+        <div class="flex items-center gap-3">
+            <div class="avatar">👑</div>
+            <div>
+                <div class="text-white font-bold text-sm">Victor Kane</div>
+                <div class="text-gold-text text-xs">💰 12,500</div>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button class="text-white text-sm bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]">🔔</button>
+            <button class="text-white text-sm bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]">⚙️</button>
+        </div>
+    </header>
+
+    <!-- ========== NOTIFICATION ========== -->
+    <div class="bg-[#1a1040] border border-[#fbbf24] rounded-2xl p-2 text-center text-xs text-gold-text mt-2">
+        🐋 Whale Gift from "DarkSoul" — +50 💎
+    </div>
+
+    <!-- ========== LOBBY TITLE ========== -->
+    <div class="text-center mt-2">
+        <h1 class="text-2xl font-serif gold-text tracking-widest font-bold">ROYAL POKER</h1>
+        <p class="text-gray-400 text-xs">LOBBY — 6/10 players</p>
+    </div>
+
+    <!-- ========== TABLE ========== -->
+    <div class="table-circle">
+        <span class="text-white text-xs font-bold">🃏</span>
+        <div class="chip-stack">
+            <div class="chip"></div>
+            <div class="chip red"></div>
+            <div class="chip blue"></div>
+        </div>
+        <span class="text-gold-text text-xs font-bold mt-1">POT 2,400</span>
+    </div>
+
+    <!-- ========== PLAYERS LIST ========== -->
+    <div class="space-y-2 mt-1">
+        <div class="player-row"><span class="text-white text-sm font-medium">👑 Victor Kane</span><span class="text-gold-text text-sm">10,000</span></div>
+        <div class="player-row"><span class="text-white text-sm font-medium">🐺 Lucius Drake</span><span class="text-gold-text text-sm">10,000</span></div>
+        <div class="player-row"><span class="text-white text-sm font-medium">🌹 Isabelle Rose</span><span class="text-gold-text text-sm">10,000</span></div>
+        <div class="player-row"><span class="text-white text-sm font-medium">⚡ Damien Wolf</span><span class="text-gold-text text-sm">10,000</span></div>
+        <div class="player-row"><span class="text-white text-sm font-medium">💎 Elena Stone</span><span class="text-gold-text text-sm">10,000</span></div>
+        <div class="player-row"><span class="text-white text-sm font-medium">🏴‍☠️ Jack Sparrow</span><span class="text-gold-text text-sm">10,000</span></div>
+    </div>
+
+    <!-- ========== ACTION BUTTONS ========== -->
+    <div class="grid grid-cols-4 gap-2 mt-3">
+        <button class="btn-dark text-xs py-2">🚪 Leave</button>
+        <button class="btn-gold text-xs py-2 col-span-2">🪑 Sit Down</button>
+        <button class="btn-dark text-xs py-2">💬 Chat</button>
+        <button class="btn-dark text-xs py-2">👥 Friends</button>
+    </div>
+
+    <!-- ========== STATUS ========== -->
+    <div class="flex justify-between text-[10px] text-gray-500 mt-3 border-t border-[#1e1548] pt-2">
+        <span>👤 6 online</span>
+        <span class="gold-text">🎯 Table: Royal Elite</span>
+        <span class="bg-[#db2777] text-white px-2 rounded-full text-[9px]">VIP</span>
+    </div>
+
+    <!-- ========== ASK ME BUTTON ========== -->
+    <button class="absolute bottom-4 right-4 bg-[#1f1545] border border-[#fbbf24] text-gold-text text-xs px-3 py-1 rounded-full shadow-lg">
+        ❓ Ask Me
+    </button>
+</div>
+</body>
+  </html>
