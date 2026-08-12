@@ -1,100 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Royal Poker – Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Inter:wght@400;600;700&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        body {
-            background: #0b0719;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            padding: 10px;
-        }
-        .phone {
-            max-width: 420px;
-            width: 100%;
-            background: radial-gradient(circle at 50% 0%, #1e1340, #0a0718 80%);
-            border-radius: 36px;
-            border: 2px solid #3b2a6b;
-            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.9), inset 0 0 60px rgba(139,92,246,0.15);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            padding: 16px 16px 12px 16px;
-            min-height: 780px;
-            position: relative;
-        }
-        .gold-text { color: #fbbf24; }
-        .gold-border { border-color: #fbbf24; }
-        .bg-glass { background: rgba(16,8,36,0.7); backdrop-filter: blur(6px); }
-        .btn-gold {
-            background: linear-gradient(145deg, #fbbf24, #d97706);
-            color: #0b0719;
-            font-weight: 700;
-            border: none;
-            border-radius: 40px;
-            padding: 10px 20px;
-            transition: all 0.15s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #a16207;
-            width: 100%;
-        }
-        .btn-gold:active { transform: translateY(2px); box-shadow: 0 2px 0 #a16207; }
-        .btn-dark {
-            background: #1f1545;
-            border: 1px solid #4b3a7a;
-            color: #cbd5e1;
-            border-radius: 40px;
-            padding: 10px 16px;
-            font-weight: 600;
-            transition: 0.15s;
-            cursor: pointer;
-        }
-        .btn-dark:active { background: #2a1d5a; }
-        .stat-box {
-            background: #161035;
-            border: 1px solid #2a1d4a;
-            border-radius: 16px;
-            padding: 10px;
-            text-align: center;
-            flex: 1;
-        }
-        .stat-box .number { font-size: 20px; font-weight: 700; color: #fff; }
-        .stat-box .label { font-size: 9px; color: #5b4b7a; text-transform: uppercase; letter-spacing: 1px; }
-        .badge-item {
-            background: #161035;
-            border: 1px solid #2a1d4a;
-            border-radius: 14px;
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .badge-item .icon { font-size: 24px; }
-        .badge-item .info .name { color: #fff; font-size: 12px; font-weight: 600; }
-        .badge-item .info .desc { color: #5b4b7a; font-size: 9px; }
-        .badge-item .progress { width: 60px; height: 4px; background: #1f1545; border-radius: 4px; overflow: hidden; margin-left: auto; }
-        .badge-item .progress .fill { height: 100%; background: #fbbf24; border-radius: 4px; }
-        .scan-line {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, #a855f7, transparent);
-            opacity: 0.3;
-            animation: scanMove 4s linear infinite;
-            pointer-events: none;
-        }
-        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
-        .tab-active { border-bottom: 2px solid #fbbf24; color: #fbbf24; }
-        .tab-inactive { color: #5b4b7a; border-bottom: 2px solid transparent; }
-        .avatar-large { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #fbbf24; background: #2a1d5a; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+        *{margin:0;padding:0;box-sizing:border-box;user-select:none}
+        body{background:#0b0719;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Inter',sans-serif;padding:10px}
+        .phone{max-width:420px;width:100%;background:radial-gradient(circle at 50% 0%,#1e1340,#0a0718 80%);border-radius:36px;border:2px solid #3b2a6b;box-shadow:0 25px 50px -8px rgba(0,0,0,0.9),inset 0 0 60px rgba(139,92,246,0.15);overflow:hidden;display:flex;flex-direction:column;padding:16px 16px 12px;min-height:780px;position:relative}
+        .gold-text{color:#fbbf24}
+        .bg-glass{background:rgba(16,8,36,0.7);backdrop-filter:blur(6px)}
+        .btn-gold{background:linear-gradient(145deg,#fbbf24,#d97706);color:#0b0719;font-weight:700;border:none;border-radius:40px;padding:10px 20px;cursor:pointer;box-shadow:0 4px 0 #a16207;transition:all 0.15s ease;width:100%}
+        .btn-gold:active{transform:translateY(2px);box-shadow:0 2px 0 #a16207}
+        .btn-dark{background:#1f1545;border:1px solid #4b3a7a;color:#cbd5e1;border-radius:40px;padding:10px 16px;font-weight:600;cursor:pointer;transition:0.15s}
+        .btn-dark:active{background:#2a1d5a}
+        .scan-line{position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#a855f7,transparent);opacity:0.3;animation:scanMove 4s linear infinite;pointer-events:none}
+        @keyframes scanMove{0%{top:0}100%{top:100%}}
+        .stat-box{background:#161035;border:1px solid #2a1d4a;border-radius:16px;padding:10px;text-align:center;flex:1}
+        .stat-box .number{font-size:20px;font-weight:700;color:#fff}
+        .stat-box .label{font-size:9px;color:#5b4b7a;text-transform:uppercase;letter-spacing:1px}
+        .badge-item{background:#161035;border:1px solid #2a1d4a;border-radius:14px;padding:8px 12px;display:flex;align-items:center;gap:8px}
+        .badge-item .icon{font-size:24px}
+        .badge-item .info .name{color:#fff;font-size:12px;font-weight:600}
+        .badge-item .info .desc{color:#5b4b7a;font-size:9px}
+        .badge-item .progress{width:60px;height:4px;background:#1f1545;border-radius:4px;overflow:hidden;margin-left:auto}
+        .badge-item .progress .fill{height:100%;background:#fbbf24;border-radius:4px}
+        .avatar-large{width:80px;height:80px;border-radius:50%;border:3px solid #fbbf24;background:#2a1d5a;display:flex;align-items:center;justify-content:center;font-size:32px}
+        .text-white{color:#ffffff}
+        .text-gold{color:#fbbf24}
+        .text-gray{color:#9ca3af}
+        .no-underline{text-decoration:none}
+        .support-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     </style>
 </head>
 <body>
@@ -104,29 +41,29 @@
     <!-- HEADER -->
     <header class="flex justify-between items-center bg-glass p-3 rounded-2xl border border-[#32235c]">
         <div class="flex items-center gap-2">
-            <button class="text-white text-sm bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]">←</button>
+            <button class="text-white text-sm bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a] back-btn" onclick="playSound('exit')">←</button>
             <span class="text-white font-bold text-sm">👤 Profile</span>
         </div>
-        <button class="text-gray-400 text-xs bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]">✏️ Edit</button>
+        <button class="text-gray text-xs bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]" onclick="playSound('click')">✏️ Edit</button>
     </header>
 
     <!-- AVATAR & NAME -->
     <div class="flex flex-col items-center mt-4">
-        <div class="avatar-large">👑</div>
-        <div class="text-white font-bold text-xl mt-2">Victor Kane</div>
+        <div class="avatar-large user-avatar">👑</div>
+        <div class="text-white font-bold text-xl mt-2 user-name">Victor Kane</div>
         <div class="flex items-center gap-2">
-            <span class="text-gray-400 text-xs">ID: #VK-0042</span>
-            <span class="bg-[#db2777] text-white text-[9px] px-2 py-0.5 rounded-full">VIP</span>
+            <span class="text-gray text-xs user-id">ID: #VK-0042</span>
+            <span class="bg-[#fbbf24] text-black text-[9px] px-2 py-0.5 rounded-full font-bold">VIP</span>
         </div>
         <div class="flex gap-4 mt-2">
-            <span class="text-gold-text text-sm font-bold">⭐ Lv. 7</span>
-            <span class="text-gray-400 text-sm">|</span>
-            <span class="text-gold-text text-sm font-bold">🪙 12,500</span>
+            <span class="text-gold text-sm font-bold user-level">⭐ Lv. 7</span>
+            <span class="text-gray text-sm">|</span>
+            <span class="text-gold text-sm font-bold user-chips">🪙 12,500</span>
         </div>
         <div class="w-48 h-1.5 bg-[#1f1545] rounded-full mt-1 overflow-hidden">
-            <div class="w-[68%] h-full bg-gradient-to-r from-[#fbbf24] to-[#d97706] rounded-full"></div>
+            <div class="w-[68%] h-full bg-gradient-to-r from-[#fbbf24] to-[#d97706] rounded-full xp-bar"></div>
         </div>
-        <span class="text-gray-500 text-[10px] mt-0.5">XP: 680 / 1,000</span>
+        <span class="text-gray text-[10px] mt-0.5 xp-text">XP: 680 / 1,000</span>
     </div>
 
     <!-- STATS -->
@@ -140,7 +77,7 @@
     <div class="mt-4">
         <div class="flex justify-between items-center">
             <span class="text-white font-semibold text-sm">🏆 Achievements</span>
-            <span class="text-gray-400 text-xs">3 / 12</span>
+            <span class="text-gray text-xs">3 / 12</span>
         </div>
         <div class="space-y-2 mt-2">
             <div class="badge-item">
@@ -163,24 +100,48 @@
 
     <!-- BUTTONS -->
     <div class="grid grid-cols-2 gap-2 mt-4">
-        <button class="btn-gold text-sm py-2">📊 My History</button>
-        <button class="btn-dark text-sm py-2">👥 Friends</button>
-        <button class="btn-dark text-sm py-2">🎁 Gift</button>
-        <button class="btn-dark text-sm py-2">📤 Share Profile</button>
+        <button class="btn-gold text-sm py-2" onclick="playSound('click')">📊 My History</button>
+        <button class="btn-dark text-sm py-2" onclick="playSound('click')">👥 Friends</button>
+        <button class="btn-dark text-sm py-2" onclick="playSound('click')">🎁 Gift</button>
+        <button class="btn-dark text-sm py-2" onclick="playSound('click')">📤 Share Profile</button>
+    </div>
+
+    <!-- SUPPORT SECTION -->
+    <div class="bg-gradient-to-r from-[#1a1040] to-[#2a1d5a] border border-[#fbbf24] rounded-2xl p-3 mt-3">
+        <div class="text-center mb-2">
+            <span class="text-white font-bold text-sm">☕ Support the Developer</span>
+            <div class="text-gold text-xs">Your support keeps the game alive ❤️</div>
+        </div>
+        <div class="support-grid">
+            <a href="https://paypal.me/YOUR_LINK" target="_blank" class="btn-gold text-xs py-2 px-2 no-underline text-center" onclick="playSound('win')" style="width:100%;min-width:unset;">💰 PayPal</a>
+            <a href="https://buymeacoffee.com/mkhledmohah" target="_blank" class="btn-gold text-xs py-2 px-2 no-underline text-center" onclick="playSound('win')" style="width:100%;min-width:unset;">☕ Coffee</a>
+        </div>
+        <div class="text-center text-[9px] text-gray mt-1">100% goes to game development</div>
     </div>
 
     <!-- NAVIGATION -->
     <div class="flex justify-around bg-[#161035] rounded-2xl border border-[#32235c] p-2 mt-3">
-        <button class="text-gray-400 text-xs">🏠 Lobby</button>
-        <button class="text-gray-400 text-xs">🛒 Shop</button>
-        <button class="text-gold-text text-xs border-b-2 border-[#fbbf24]">👤 Profile</button>
-        <button class="text-gray-400 text-xs">⚙️ Settings</button>
+        <button class="text-gray text-xs" data-nav="index" onclick="playSound('click')">🏠 Lobby</button>
+        <button class="text-gray text-xs" data-nav="shop" onclick="playSound('click')">🛒 Shop</button>
+        <button class="text-gold text-xs border-b-2 border-[#fbbf24]">👤 Profile</button>
+        <button class="text-gray text-xs" data-nav="settings" onclick="playSound('click')">⚙️ Settings</button>
     </div>
 
     <!-- ASK ME -->
-    <button class="absolute bottom-4 right-4 bg-[#1f1545] border border-[#fbbf24] text-gold-text text-xs px-3 py-1 rounded-full shadow-lg">
-        ❓ Ask Me
-    </button>
+    <button class="absolute bottom-4 right-4 bg-[#f59e0b] text-white text-xs px-3 py-1.5 rounded-full shadow-lg font-bold hover:bg-[#d97706] transition ask-me-btn" onclick="playSound('click')">❓ Ask Me</button>
 </div>
+<script>
+    function playSound(type) {
+        const sounds = {
+            click: 'https://www.soundjay.com/button/button-09.mp3',
+            chips: 'https://www.soundjay.com/misc/coins-1.mp3',
+            win: 'https://www.soundjay.com/misc/success-1.mp3',
+            exit: 'https://www.soundjay.com/misc/click-01.mp3'
+        };
+        const audio = new Audio(sounds[type] || sounds.click);
+        audio.play().catch(() => {});
+    }
+</script>
+<script src="app.js"></script>
 </body>
 </html>
