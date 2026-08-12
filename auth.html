@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Royal Poker – Auth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Inter:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        body {
+            background: #0b0719;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            padding: 10px;
+        }
+        .phone {
+            max-width: 420px;
+            width: 100%;
+            background: radial-gradient(circle at 50% 0%, #1e1340, #0a0718 80%);
+            border-radius: 36px;
+            border: 2px solid #3b2a6b;
+            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.9), inset 0 0 60px rgba(139,92,246,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 32px 24px 24px 24px;
+            min-height: 700px;
+            position: relative;
+        }
+        .gold-text { color: #fbbf24; }
+        .gold-border { border-color: #fbbf24; }
+        .bg-glass { background: rgba(16,8,36,0.6); backdrop-filter: blur(4px); }
+        .btn-gold {
+            background: linear-gradient(145deg, #fbbf24, #d97706);
+            color: #0b0719;
+            font-weight: 700;
+            border: none;
+            border-radius: 40px;
+            padding: 14px;
+            width: 100%;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #a16207;
+        }
+        .btn-gold:active { transform: translateY(2px); box-shadow: 0 2px 0 #a16207; }
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: #161035;
+            border: 1px solid #2a1d4a;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+        .input-field:focus { border-color: #fbbf24; box-shadow: 0 0 0 2px rgba(251,191,36,0.2); }
+        .input-field::placeholder { color: #5b4b7a; }
+        .link-text { color: #a78bfa; cursor: pointer; font-weight: 600; }
+        .link-text:hover { color: #fbbf24; }
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, #a855f7, transparent);
+            opacity: 0.3;
+            animation: scanMove 4s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid #2a1d4a;
+            background: #161035;
+            color: #cbd5e1;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .social-btn:hover { border-color: #fbbf24; background: #1f1545; }
+        .hidden-form { display: none; }
+    </style>
+</head>
+<body>
+<div class="phone">
+    <div class="scan-line"></div>
+
+    <!-- ========== LOGO ========== -->
+    <div class="text-center mb-6">
+        <h1 class="text-4xl font-serif gold-text tracking-widest font-bold">♛ ROYAL</h1>
+        <p class="text-gray-400 text-sm tracking-widest">POKER · LIVE</p>
+    </div>
+
+    <!-- ========== LOGIN FORM ========== -->
+    <div id="login-form">
+        <p class="text-white text-center text-sm mb-6">Welcome back. Login to continue.</p>
+
+        <div class="space-y-4">
+            <input type="email" class="input-field" placeholder="Email address" id="login-email" />
+            <input type="password" class="input-field" placeholder="Password" id="login-password" />
+        </div>
+
+        <button class="btn-gold mt-6" id="login-btn">Sign In</button>
+
+        <div class="text-center mt-4">
+            <span class="text-gray-400 text-sm">Forgot password? </span>
+            <span class="link-text text-sm">Reset it here</span>
+        </div>
+
+        <div class="flex items-center gap-3 my-5">
+            <div class="flex-1 h-px bg-[#2a1d4a]"></div>
+            <span class="text-gray-500 text-xs">OR</span>
+            <div class="flex-1 h-px bg-[#2a1d4a]"></div>
+        </div>
+
+        <div class="space-y-3">
+            <button class="social-btn">🅶 Continue with Google</button>
+            <button class="social-btn">🍏 Continue with Apple</button>
+        </div>
+
+        <div class="text-center mt-5">
+            <span class="text-gray-400 text-sm">Don't have an account? </span>
+            <span class="link-text text-sm" id="show-signup">Sign Up</span>
+        </div>
+    </div>
+
+    <!-- ========== SIGNUP FORM ========== -->
+    <div id="signup-form" class="hidden-form">
+        <p class="text-white text-center text-sm mb-6">Join the elite. Create your account.</p>
+
+        <div class="space-y-4">
+            <input type="text" class="input-field" placeholder="Full name" id="signup-name" />
+            <input type="email" class="input-field" placeholder="Email address" id="signup-email" />
+            <input type="password" class="input-field" placeholder="Password (min 8 chars)" id="signup-password" />
+            <input type="password" class="input-field" placeholder="Confirm password" id="signup-confirm" />
+        </div>
+
+        <button class="btn-gold mt-6" id="signup-btn">Create Account</button>
+
+        <div class="text-center mt-4">
+            <span class="text-gray-400 text-sm">Already have an account? </span>
+            <span class="link-text text-sm" id="show-login">Sign In</span>
+        </div>
+    </div>
+
+    <!-- ========== ASK ME BUTTON ========== -->
+    <button class="absolute bottom-4 right-4 bg-[#1f1545] border border-[#fbbf24] text-gold-text text-xs px-3 py-1 rounded-full shadow-lg">
+        ❓ Ask Me
+    </button>
+</div>
+
+<script>
+    // Toggle between Login and Signup
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const showSignup = document.getElementById('show-signup');
+    const showLogin = document.getElementById('show-login');
+
+    showSignup.addEventListener('click', () => {
+        loginForm.classList.add('hidden-form');
+        signupForm.classList.remove('hidden-form');
+    });
+
+    showLogin.addEventListener('click', () => {
+        signupForm.classList.add('hidden-form');
+        loginForm.classList.remove('hidden-form');
+    });
+
+    // Placeholder actions
+    document.getElementById('login-btn').addEventListener('click', () => {
+        alert('🚀 Login clicked – redirecting to lobby...');
+        // window.location.href = 'index.html'; // uncomment when ready
+    });
+
+    document.getElementById('signup-btn').addEventListener('click', () => {
+        alert('✅ Account created successfully! Please check your email.');
+    });
+</script>
+</body>
+</html>
