@@ -1,90 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Royal Poker – Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Inter:wght@400;600;700&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        body {
-            background: #0b0719;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            padding: 10px;
-        }
-        .phone {
-            max-width: 420px;
-            width: 100%;
-            background: radial-gradient(circle at 50% 0%, #1e1340, #0a0718 80%);
-            border-radius: 36px;
-            border: 2px solid #3b2a6b;
-            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.9), inset 0 0 60px rgba(139,92,246,0.15);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            padding: 16px 16px 12px 16px;
-            min-height: 780px;
-            position: relative;
-        }
-        .gold-text { color: #fbbf24; }
-        .gold-border { border-color: #fbbf24; }
-        .bg-glass { background: rgba(16,8,36,0.7); backdrop-filter: blur(6px); }
-        .btn-gold {
-            background: linear-gradient(145deg, #fbbf24, #d97706);
-            color: #0b0719;
-            font-weight: 700;
-            border: none;
-            border-radius: 40px;
-            padding: 10px 20px;
-            transition: all 0.15s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #a16207;
-            width: 100%;
-        }
-        .btn-gold:active { transform: translateY(2px); box-shadow: 0 2px 0 #a16207; }
-        .btn-dark {
-            background: #1f1545;
-            border: 1px solid #4b3a7a;
-            color: #cbd5e1;
-            border-radius: 40px;
-            padding: 10px 16px;
-            font-weight: 600;
-            transition: 0.15s;
-            cursor: pointer;
-        }
-        .btn-dark:active { background: #2a1d5a; }
-        .shop-card {
-            background: #161035;
-            border: 1px solid #2a1d4a;
-            border-radius: 20px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: 0.2s;
-        }
-        .shop-card:hover { border-color: #fbbf24; }
-        .shop-card .icon { font-size: 40px; margin-bottom: 4px; }
-        .shop-card .name { color: #fff; font-weight: 600; font-size: 14px; }
-        .shop-card .price { color: #fbbf24; font-weight: 700; font-size: 13px; margin-top: 2px; }
-        .shop-card .badge { font-size: 9px; background: #db2777; color: #fff; padding: 2px 8px; border-radius: 20px; margin-top: 4px; }
-        .scan-line {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, #a855f7, transparent);
-            opacity: 0.3;
-            animation: scanMove 4s linear infinite;
-            pointer-events: none;
-        }
-        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
-        .tab-active { border-bottom: 2px solid #fbbf24; color: #fbbf24; }
-        .tab-inactive { color: #5b4b7a; border-bottom: 2px solid transparent; }
+        *{margin:0;padding:0;box-sizing:border-box;user-select:none}
+        body{background:#0b0719;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Inter',sans-serif;padding:10px}
+        .phone{max-width:420px;width:100%;background:radial-gradient(circle at 50% 0%,#1e1340,#0a0718 80%);border-radius:36px;border:2px solid #3b2a6b;box-shadow:0 25px 50px -8px rgba(0,0,0,0.9),inset 0 0 60px rgba(139,92,246,0.15);overflow:hidden;display:flex;flex-direction:column;padding:16px 16px 12px;min-height:780px;position:relative}
+        .gold-text{color:#fbbf24}
+        .bg-glass{background:rgba(16,8,36,0.7);backdrop-filter:blur(6px)}
+        .btn-gold{background:linear-gradient(145deg,#fbbf24,#d97706);color:#0b0719;font-weight:700;border:none;border-radius:40px;padding:10px 20px;cursor:pointer;box-shadow:0 4px 0 #a16207;transition:all 0.15s ease;width:100%}
+        .btn-gold:active{transform:translateY(2px);box-shadow:0 2px 0 #a16207}
+        .btn-dark{background:#1f1545;border:1px solid #4b3a7a;color:#cbd5e1;border-radius:40px;padding:10px 16px;font-weight:600;cursor:pointer;transition:0.15s}
+        .btn-dark:active{background:#2a1d5a}
+        .scan-line{position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#a855f7,transparent);opacity:0.3;animation:scanMove 4s linear infinite;pointer-events:none}
+        @keyframes scanMove{0%{top:0}100%{top:100%}}
+        .tab-active{border-bottom:2px solid #fbbf24;color:#fbbf24}
+        .tab-inactive{color:#5b4b7a;border-bottom:2px solid transparent}
+        .shop-card{background:#161035;border:1px solid #2a1d4a;border-radius:20px;padding:12px;display:flex;flex-direction:column;align-items:center;transition:0.2s}
+        .shop-card:hover{border-color:#fbbf24}
+        .shop-card .icon{font-size:40px;margin-bottom:4px}
+        .shop-card .name{color:#fff;font-weight:600;font-size:14px}
+        .shop-card .price{color:#fbbf24;font-weight:700;font-size:13px;margin-top:2px}
+        .shop-card .badge{font-size:9px;background:#db2777;color:#fff;padding:2px 8px;border-radius:20px;margin-top:4px}
+        .text-white{color:#ffffff}
+        .text-gold{color:#fbbf24}
+        .text-gray{color:#9ca3af}
+        .no-underline{text-decoration:none}
+        .support-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     </style>
 </head>
 <body>
@@ -94,12 +39,12 @@
     <!-- HEADER -->
     <header class="flex justify-between items-center bg-glass p-3 rounded-2xl border border-[#32235c]">
         <div class="flex items-center gap-2">
-            <button class="text-white text-sm bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]">←</button>
+            <button class="text-white text-sm bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a] back-btn" onclick="playSound('exit')">←</button>
             <span class="text-white font-bold text-sm">🛒 Shop</span>
         </div>
         <div class="flex items-center gap-2">
-            <span class="text-gold-text text-sm font-bold">💰 1,450</span>
-            <span class="text-blue-400 text-sm font-bold">💎 280</span>
+            <span class="text-gold text-sm font-bold user-chips">💰 1,450</span>
+            <span class="text-blue-400 text-sm font-bold user-gems">💎 280</span>
         </div>
     </header>
 
@@ -111,48 +56,44 @@
         <span class="tab-inactive pb-1">🎭 Characters</span>
     </div>
 
-    <!-- BALANCE INFO -->
+    <!-- BALANCE -->
     <div class="bg-[#1a1040] border border-[#fbbf24] rounded-2xl p-3 mt-3 text-center">
-        <span class="text-gray-400 text-xs">YOUR BALANCE</span>
+        <span class="text-gray text-xs">YOUR BALANCE</span>
         <div class="flex justify-center gap-6 mt-1">
-            <span class="text-gold-text font-bold">🪙 1,450</span>
-            <span class="text-blue-400 font-bold">💎 280</span>
+            <span class="text-gold font-bold user-chips">🪙 1,450</span>
+            <span class="text-blue-400 font-bold user-gems">💎 280</span>
         </div>
     </div>
 
-    <!-- FEATURED ITEMS -->
+    <!-- SHOP ITEMS -->
     <div class="grid grid-cols-2 gap-3 mt-4">
-        <!-- Item 1 -->
         <div class="shop-card">
             <div class="icon">🃏</div>
             <div class="name">Gold Deck</div>
             <div class="price">🪙 250</div>
             <span class="badge">🔥 Popular</span>
-            <button class="btn-gold text-xs py-1 mt-2">Buy</button>
+            <button class="btn-gold text-xs py-1 mt-2" onclick="playSound('chips')">Buy</button>
         </div>
-        <!-- Item 2 -->
         <div class="shop-card">
             <div class="icon">👑</div>
             <div class="name">Royal Throne</div>
             <div class="price">💎 120</div>
             <span class="badge">✨ Limited</span>
-            <button class="btn-gold text-xs py-1 mt-2">Buy</button>
+            <button class="btn-gold text-xs py-1 mt-2" onclick="playSound('chips')">Buy</button>
         </div>
-        <!-- Item 3 -->
         <div class="shop-card">
             <div class="icon">♠️</div>
             <div class="name">Dark Knight</div>
             <div class="price">🪙 400</div>
             <span class="badge">⭐ Legendary</span>
-            <button class="btn-gold text-xs py-1 mt-2">Buy</button>
+            <button class="btn-gold text-xs py-1 mt-2" onclick="playSound('chips')">Buy</button>
         </div>
-        <!-- Item 4 -->
         <div class="shop-card">
             <div class="icon">🎩</div>
             <div class="name">The Magician</div>
             <div class="price">💎 80</div>
             <span class="badge">🎁 New</span>
-            <button class="btn-gold text-xs py-1 mt-2">Buy</button>
+            <button class="btn-gold text-xs py-1 mt-2" onclick="playSound('chips')">Buy</button>
         </div>
     </div>
 
@@ -160,24 +101,48 @@
     <div class="bg-gradient-to-r from-[#1a1040] to-[#2a1d5a] border border-[#fbbf24] rounded-2xl p-3 mt-3 flex justify-between items-center">
         <div>
             <span class="text-white font-bold text-sm">🔥 Whale Pack</span>
-            <div class="text-gold-text text-xs">500 🪙 + 100 💎</div>
-            <div class="text-gray-400 text-[10px]">$4.99 — Save 40%</div>
+            <div class="text-gold text-xs">500 🪙 + 100 💎</div>
+            <div class="text-gray text-[10px]">$4.99 — Save 40%</div>
         </div>
-        <button class="btn-gold text-xs py-1 px-4">Buy</button>
+        <button class="btn-gold text-xs py-1 px-4" onclick="playSound('win')">Buy</button>
+    </div>
+
+    <!-- ===== SUPPORT SECTION ===== -->
+    <div class="bg-gradient-to-r from-[#1a1040] to-[#2a1d5a] border border-[#fbbf24] rounded-2xl p-3 mt-3">
+        <div class="text-center mb-2">
+            <span class="text-white font-bold text-sm">☕ Support the Developer</span>
+            <div class="text-gold text-xs">Your support keeps the game alive ❤️</div>
+        </div>
+        <div class="support-grid">
+            <a href="https://paypal.me/YOUR_LINK" target="_blank" class="btn-gold text-xs py-2 px-2 no-underline text-center" onclick="playSound('win')" style="width:100%;min-width:unset;">💰 PayPal</a>
+            <a href="https://buymeacoffee.com/mkhledmohah" target="_blank" class="btn-gold text-xs py-2 px-2 no-underline text-center" onclick="playSound('win')" style="width:100%;min-width:unset;">☕ Coffee</a>
+        </div>
+        <div class="text-center text-[9px] text-gray mt-1">100% goes to game development</div>
     </div>
 
     <!-- NAVIGATION -->
     <div class="flex justify-around bg-[#161035] rounded-2xl border border-[#32235c] p-2 mt-3">
-        <button class="text-gray-400 text-xs">🏠 Lobby</button>
-        <button class="text-gold-text text-xs border-b-2 border-[#fbbf24]">🛒 Shop</button>
-        <button class="text-gray-400 text-xs">👤 Profile</button>
-        <button class="text-gray-400 text-xs">⚙️ Settings</button>
+        <button class="text-gray text-xs" data-nav="index" onclick="playSound('click')">🏠 Lobby</button>
+        <button class="text-gold text-xs border-b-2 border-[#fbbf24]">🛒 Shop</button>
+        <button class="text-gray text-xs" data-nav="profile" onclick="playSound('click')">👤 Profile</button>
+        <button class="text-gray text-xs" data-nav="settings" onclick="playSound('click')">⚙️ Settings</button>
     </div>
 
     <!-- ASK ME -->
-    <button class="absolute bottom-4 right-4 bg-[#1f1545] border border-[#fbbf24] text-gold-text text-xs px-3 py-1 rounded-full shadow-lg">
-        ❓ Ask Me
-    </button>
+    <button class="absolute bottom-4 right-4 bg-[#f59e0b] text-white text-xs px-3 py-1.5 rounded-full shadow-lg font-bold hover:bg-[#d97706] transition ask-me-btn" onclick="playSound('click')">❓ Ask Me</button>
 </div>
+<script>
+    function playSound(type) {
+        const sounds = {
+            click: 'https://www.soundjay.com/button/button-09.mp3',
+            chips: 'https://www.soundjay.com/misc/coins-1.mp3',
+            win: 'https://www.soundjay.com/misc/success-1.mp3',
+            exit: 'https://www.soundjay.com/misc/click-01.mp3'
+        };
+        const audio = new Audio(sounds[type] || sounds.click);
+        audio.play().catch(() => {});
+    }
+</script>
+<script src="app.js"></script>
 </body>
 </html>
