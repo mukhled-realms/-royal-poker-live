@@ -3,7 +3,7 @@
 // ============================================================
 
 // ============================================================
-//  STATE (البيانات المشتركة بين جميع الصفحات)
+//  STATE
 // ============================================================
 const state = {
     currentUser: {
@@ -46,56 +46,53 @@ const state = {
 };
 
 // ============================================================
-//  HELPER FUNCTIONS
+//  UPDATE FUNCTIONS
 // ============================================================
-
 function updateUserDisplay() {
-    const user = state.currentUser;
-    document.querySelectorAll('.user-name').forEach(el => el.textContent = user.name);
-    document.querySelectorAll('.user-chips').forEach(el => el.textContent = user.chips.toLocaleString());
-    document.querySelectorAll('.user-gems').forEach(el => el.textContent = user.gems);
-    document.querySelectorAll('.user-level').forEach(el => el.textContent = user.level);
-    document.querySelectorAll('.user-avatar').forEach(el => el.textContent = user.avatar);
-    document.querySelectorAll('.user-id').forEach(el => el.textContent = user.id);
-    document.querySelectorAll('.user-vip').forEach(el => el.style.display = user.vip ? 'inline' : 'none');
+    const u = state.currentUser;
+    document.querySelectorAll('.user-name').forEach(el => el.textContent = u.name);
+    document.querySelectorAll('.user-chips').forEach(el => el.textContent = u.chips.toLocaleString());
+    document.querySelectorAll('.user-gems').forEach(el => el.textContent = u.gems);
+    document.querySelectorAll('.user-level').forEach(el => el.textContent = u.level);
+    document.querySelectorAll('.user-avatar').forEach(el => el.textContent = u.avatar);
+    document.querySelectorAll('.user-id').forEach(el => el.textContent = u.id);
+    document.querySelectorAll('.user-vip').forEach(el => el.style.display = u.vip ? 'inline' : 'none');
     document.querySelectorAll('.xp-bar').forEach(el => {
-        const pct = Math.min(100, (user.xp / user.xpMax) * 100);
-        el.style.width = pct + '%';
+        el.style.width = Math.min(100, (u.xp / u.xpMax) * 100) + '%';
     });
-    document.querySelectorAll('.xp-text').forEach(el => el.textContent = `${user.xp} / ${user.xpMax} XP`);
+    document.querySelectorAll('.xp-text').forEach(el => el.textContent = `${u.xp} / ${u.xpMax} XP`);
 }
 
 function updateTableDisplay() {
-    const table = state.table;
-    document.querySelectorAll('.pot-display').forEach(el => el.textContent = table.pot.toLocaleString());
-    document.querySelectorAll('.player-count').forEach(el => el.textContent = `${table.players.length}/10`);
-    // لاعبين الطاولة
+    const t = state.table;
+    document.querySelectorAll('.pot-display').forEach(el => el.textContent = t.pot.toLocaleString());
+    document.querySelectorAll('.player-count').forEach(el => el.textContent = `${t.players.length}/10`);
     document.querySelectorAll('.table-players').forEach(container => {
-        container.innerHTML = table.players.map(p => `
+        container.innerHTML = t.players.map(p => `
             <div class="player-row">
                 <span class="text-white text-sm font-medium">${p.avatar} ${p.name}</span>
-                <span class="text-gold-text text-sm">${p.chips.toLocaleString()}</span>
+                <span class="text-gold text-sm">${p.chips.toLocaleString()}</span>
             </div>
         `).join('');
     });
 }
 
 function updateShopDisplay() {
-    const shop = state.shop;
+    const s = state.shop;
     document.querySelectorAll('.shop-featured').forEach(el => {
         el.innerHTML = `
             <div class="bg-gradient-to-r from-[#1a1040] to-[#2a1d5a] border border-[#fbbf24] rounded-2xl p-3 flex justify-between items-center">
                 <div>
-                    <span class="text-white font-bold text-sm">🔥 ${shop.featured.name}</span>
-                    <div class="text-gold-text text-xs">${shop.featured.chips} 🪙 + ${shop.featured.gems} 💎</div>
-                    <div class="text-gray-400 text-[10px]">$${shop.featured.price} — Save ${shop.featured.discount}%</div>
+                    <span class="text-white font-bold text-sm">🔥 ${s.featured.name}</span>
+                    <div class="text-gold text-xs">${s.featured.chips} 🪙 + ${s.featured.gems} 💎</div>
+                    <div class="text-gray text-[10px]">$${s.featured.price} — Save ${s.featured.discount}%</div>
                 </div>
                 <button class="btn-gold text-xs py-1 px-4" onclick="buyFeatured()">Buy</button>
             </div>
         `;
     });
     document.querySelectorAll('.shop-items').forEach(container => {
-        container.innerHTML = shop.items.map(item => `
+        container.innerHTML = s.items.map(item => `
             <div class="shop-card">
                 <div class="icon">${item.icon}</div>
                 <div class="name">${item.name}</div>
@@ -107,47 +104,56 @@ function updateShopDisplay() {
     });
 }
 
+// ============================================================
+//  BUY FUNCTIONS
+// ============================================================
 function buyItem(id) {
     const item = state.shop.items.find(i => i.id === id);
     if (!item) return;
-    const user = state.currentUser;
+    const u = state.currentUser;
     const currency = item.currency === 'chips' ? 'chips' : 'gems';
-    if (user[currency] < item.price) {
-        alert(`❌ Not enough ${currency}! You have ${user[currency]}.`);
+    if (u[currency] < item.price) {
+        alert(`❌ Not enough ${currency}! You have ${u[currency]}.`);
         return;
     }
     if (confirm(`Buy ${item.name} for ${item.price} ${currency}?`)) {
-        user[currency] -= item.price;
+        u[currency] -= item.price;
         updateUserDisplay();
         updateShopDisplay();
         alert(`✅ You bought ${item.name}!`);
+        playSound('win');
     }
 }
 
 function buyFeatured() {
-    const user = state.currentUser;
+    const u = state.currentUser;
     if (confirm(`Buy Whale Pack for $${state.shop.featured.price}? (demo only)`)) {
-        user.chips += state.shop.featured.chips;
-        user.gems += state.shop.featured.gems;
+        u.chips += state.shop.featured.chips;
+        u.gems += state.shop.featured.gems;
         updateUserDisplay();
         alert(`✅ You got ${state.shop.featured.chips} chips + ${state.shop.featured.gems} gems!`);
+        playSound('win');
     }
 }
 
 // ============================================================
-//  ROUTER – تحميل الصفحات ديناميكياً
+//  NAVIGATION – LOAD PAGES
 // ============================================================
-
 const pages = {};
+let currentPage = 'auth';
 
 async function loadPage(name) {
     try {
         const res = await fetch(`${name}.html`);
         const html = await res.text();
         const container = document.getElementById('app');
-        container.innerHTML = html;
-        state.currentPage = name;
-        // تحديث البيانات بعد تحميل الصفحة
+        if (!container) {
+            const newContainer = document.createElement('div');
+            newContainer.id = 'app';
+            document.body.appendChild(newContainer);
+        }
+        document.getElementById('app').innerHTML = html;
+        currentPage = name;
         setTimeout(() => {
             updateUserDisplay();
             updateTableDisplay();
@@ -162,46 +168,43 @@ async function loadPage(name) {
 }
 
 function navigateTo(page) {
-    if (page === state.currentPage) return;
+    if (page === currentPage) return;
     loadPage(page);
 }
 
 // ============================================================
-//  BIND EVENTS (ربط الأزرار)
+//  BIND EVENTS
 // ============================================================
-
 function bindEvents() {
-    // أزرار التنقل من أي صفحة
     document.querySelectorAll('[data-nav]').forEach(el => {
         el.addEventListener('click', (e) => {
             e.preventDefault();
-            const page = el.dataset.nav;
-            navigateTo(page);
+            navigateTo(el.dataset.nav);
         });
     });
 
-    // زر Ask Me
     document.querySelectorAll('.ask-me-btn').forEach(el => {
         el.addEventListener('click', () => {
             alert('❓ Ask Me: How can I help you?\n\nQuick Help:\n- How to play?\n- How to buy chips?\n- How to invite friends?');
+            playSound('click');
         });
     });
 
-    // زر Sit Down (في اللوبي)
     document.querySelectorAll('.sit-down-btn').forEach(el => {
         el.addEventListener('click', () => {
             navigateTo('table');
+            playSound('deal');
         });
     });
 
-    // أزرار العودة
     document.querySelectorAll('.back-btn').forEach(el => {
         el.addEventListener('click', () => {
             navigateTo('index');
+            playSound('exit');
         });
     });
 
-    // أزرار تسجيل الدخول والتسجيل
+    // Login
     const loginBtn = document.querySelector('#login-btn');
     if (loginBtn) {
         loginBtn.addEventListener('click', () => {
@@ -210,12 +213,15 @@ function bindEvents() {
             if (email && pass) {
                 alert('✅ Logged in as ' + state.currentUser.name);
                 navigateTo('index');
+                playSound('win');
             } else {
                 alert('⚠️ Please fill in all fields.');
+                playSound('exit');
             }
         });
     }
 
+    // Signup
     const signupBtn = document.querySelector('#signup-btn');
     if (signupBtn) {
         signupBtn.addEventListener('click', () => {
@@ -227,18 +233,21 @@ function bindEvents() {
                 state.currentUser.name = name;
                 alert('✅ Account created! Welcome ' + name);
                 navigateTo('index');
+                playSound('win');
             } else {
                 alert('⚠️ Please fill in all fields correctly.');
+                playSound('exit');
             }
         });
     }
 
-    // تبديل بين تسجيل الدخول والتسجيل
+    // Toggle login/signup
     const showSignup = document.querySelector('#show-signup');
     if (showSignup) {
         showSignup.addEventListener('click', () => {
             document.querySelector('#login-form').classList.add('hidden-form');
             document.querySelector('#signup-form').classList.remove('hidden-form');
+            playSound('click');
         });
     }
     const showLogin = document.querySelector('#show-login');
@@ -246,24 +255,48 @@ function bindEvents() {
         showLogin.addEventListener('click', () => {
             document.querySelector('#signup-form').classList.add('hidden-form');
             document.querySelector('#login-form').classList.remove('hidden-form');
+            playSound('click');
         });
     }
 }
 
 // ============================================================
-//  EXPOSE GLOBALLY (للاستخدام من الأزرار المباشرة)
+//  PLAY SOUND
+// ============================================================
+function playSound(type) {
+    const sounds = {
+        click: 'https://www.soundjay.com/button/button-09.mp3',
+        deal: 'https://www.soundjay.com/misc/card-shuffle-1.mp3',
+        chips: 'https://www.soundjay.com/misc/coins-1.mp3',
+        win: 'https://www.soundjay.com/misc/success-1.mp3',
+        exit: 'https://www.soundjay.com/misc/click-01.mp3'
+    };
+    const audio = new Audio(sounds[type] || sounds.click);
+    audio.play().catch(() => {});
+}
+
+// ============================================================
+//  EXPOSE GLOBALLY
 // ============================================================
 window.navigateTo = navigateTo;
 window.buyItem = buyItem;
 window.buyFeatured = buyFeatured;
+window.playSound = playSound;
 window.state = state;
 
 // ============================================================
-//  INIT – تحميل الصفحة الأولى
+//  INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
-    const container = document.createElement('div');
-    container.id = 'app';
-    document.body.appendChild(container);
-    loadPage('auth');
+    if (!document.getElementById('app')) {
+        const container = document.createElement('div');
+        container.id = 'app';
+        document.body.appendChild(container);
+    }
+    // Check if user is logged in (demo)
+    if (state.isLoggedIn) {
+        loadPage('index');
+    } else {
+        loadPage('auth');
+    }
 });
