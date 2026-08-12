@@ -1,124 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Royal Poker – Table</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Inter:wght@400;600;700&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        body {
-            background: #0b0719;
+        *{margin:0;padding:0;box-sizing:border-box;user-select:none}
+        body{background:#0b0719;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Inter',sans-serif;padding:10px}
+        .phone{max-width:420px;width:100%;background:radial-gradient(circle at 50% 0%,#1e1340,#0a0718 80%);border-radius:36px;border:2px solid #3b2a6b;box-shadow:0 25px 50px -8px rgba(0,0,0,0.9),inset 0 0 60px rgba(139,92,246,0.15);overflow:hidden;display:flex;flex-direction:column;padding:16px 16px 12px;min-height:780px;position:relative}
+        .gold-text{color:#fbbf24}
+        .bg-glass{background:rgba(16,8,36,0.7);backdrop-filter:blur(6px)}
+        .btn-action{flex:1;padding:10px 0;border-radius:40px;font-weight:700;font-size:13px;border:none;cursor:pointer;transition:0.1s;text-align:center}
+        .btn-action:active{transform:scale(0.95)}
+        .btn-fold{background:#7f1d1d;color:#fca5a5}
+        .btn-check{background:#1e3a5f;color:#93c5fd}
+        .btn-call{background:#1a4a2a;color:#86efac}
+        .btn-raise{background:#d97706;color:#0b0719}
+        .btn-allin{background:#6b21a5;color:#d8b4fe}
+        .seat{display:flex;flex-direction:column;align-items:center;gap:2px;width:56px}
+        .seat .avatar{width:36px;height:36px;border-radius:50%;background:#2a1d5a;border:2px solid #4b3a7a;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fbbf24;font-size:14px}
+        .seat .name{color:#cbd5e1;font-size:9px;font-weight:600;text-align:center;max-width:56px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+        .seat .chips{color:#fbbf24;font-size:8px;font-weight:700}
+        .seat .active-ring{border-color:#fbbf24;box-shadow:0 0 12px rgba(251,191,36,0.5)}
+        .table-felt{background:radial-gradient(ellipse at center,#1a5a2a,#0d2a1a);border:6px solid #3b2a1a;border-radius:50%;width:220px;height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:8px auto;box-shadow:inset 0 0 50px rgba(0,0,0,0.8),0 0 30px rgba(251,191,36,0.15)}
+        .card-slot{width:28px;height:40px;background:#fff;border-radius:4px;border:1px solid #333;display:inline-block;margin:0 2px}
+        .card-slot.back{background:linear-gradient(145deg,#1a3a8a,#0d1a4a);border-color:#4b6a9a}
+        .range-slider{width:100%;accent-color:#fbbf24}
+        .scan-line{position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#a855f7,transparent);opacity:0.3;animation:scanMove 4s linear infinite;pointer-events:none}
+        @keyframes scanMove{0%{top:0}100%{top:100%}}
+        .text-white{color:#ffffff}
+        .text-gold{color:#fbbf24}
+        .text-gray{color:#9ca3af}
+
+        /* ===== البطاقات المروحية (Fan-Out) ===== */
+        .pro-hand-container {
+            background: linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(3,3,8,0.98) 100%);
+            backdrop-filter: blur(25px);
+            border: 2px solid rgba(255, 190, 11, 0.3);
+            border-radius: 22px;
+            padding: 16px 10px 12px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.9);
+            margin-top: 8px;
+        }
+        .cards-fan {
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            padding: 10px;
-        }
-        .phone {
-            max-width: 420px;
+            align-items: flex-end;
+            height: 100px;
             width: 100%;
-            background: radial-gradient(circle at 50% 0%, #1e1340, #0a0718 80%);
-            border-radius: 36px;
-            border: 2px solid #3b2a6b;
-            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.9), inset 0 0 60px rgba(139,92,246,0.15);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            padding: 16px 16px 12px 16px;
-            min-height: 780px;
             position: relative;
+            perspective: 1000px;
         }
-        .gold-text { color: #fbbf24; }
-        .gold-border { border-color: #fbbf24; }
-        .bg-glass { background: rgba(16,8,36,0.7); backdrop-filter: blur(6px); }
-        .btn-action {
-            flex: 1;
-            padding: 10px 0;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 13px;
-            border: none;
-            cursor: pointer;
-            transition: 0.1s ease;
-            text-align: center;
-        }
-        .btn-action:active { transform: scale(0.95); }
-        .btn-fold { background: #7f1d1d; color: #fca5a5; }
-        .btn-check { background: #1e3a5f; color: #93c5fd; }
-        .btn-call { background: #1a4a2a; color: #86efac; }
-        .btn-raise { background: #d97706; color: #0b0719; }
-        .btn-allin { background: #6b21a5; color: #d8b4fe; }
-        .seat {
+        .pro-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            color: #0f172a;
+            width: 54px;
+            height: 82px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            width: 56px;
-        }
-        .seat .avatar { width: 36px; height: 36px; border-radius: 50%; background: #2a1d5a; border: 2px solid #4b3a7a; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fbbf24; font-size: 14px; }
-        .seat .name { color: #cbd5e1; font-size: 9px; font-weight: 600; text-align: center; max-width: 56px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .seat .chips { color: #fbbf24; font-size: 8px; font-weight: 700; }
-        .seat .active-ring { border-color: #fbbf24; box-shadow: 0 0 12px rgba(251,191,36,0.5); }
-        .table-felt {
-            background: radial-gradient(ellipse at center, #1a5a2a, #0d2a1a);
-            border: 8px solid #3b2a1a;
-            border-radius: 50%;
-            width: 240px;
-            height: 240px;
-            position: relative;
-            box-shadow: inset 0 0 60px rgba(0,0,0,0.8), 0 0 40px rgba(251,191,36,0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 4px auto;
-        }
-        .card-slot { width: 28px; height: 40px; background: #fff; border-radius: 4px; border: 1px solid #333; display: inline-block; margin: 0 2px; }
-        .card-slot.back { background: linear-gradient(145deg, #1a3a8a, #0d1a4a); border-color: #4b6a9a; }
-        .range-slider { width: 100%; accent-color: #fbbf24; }
-        .scan-line {
+            justify-content: space-between;
+            padding: 4px 6px;
+            font-weight: bold;
+            box-shadow: -5px 10px 20px rgba(0,0,0,0.6);
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, #a855f7, transparent);
-            opacity: 0.3;
-            animation: scanMove 4s linear infinite;
-            pointer-events: none;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            user-select: none;
+            border: 1px solid rgba(0,0,0,0.1);
         }
-        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
+        .pro-card:nth-child(1) { transform: translateX(-72px) rotate(-22deg) translateY(8px); z-index: 1; transform-origin: bottom center; }
+        .pro-card:nth-child(2) { transform: translateX(-36px) rotate(-11deg) translateY(4px); z-index: 2; transform-origin: bottom center; }
+        .pro-card:nth-child(3) { transform: translateX(0px) rotate(0deg) translateY(0px); z-index: 3; transform-origin: bottom center; }
+        .pro-card:nth-child(4) { transform: translateX(36px) rotate(11deg) translateY(4px); z-index: 4; transform-origin: bottom center; }
+        .pro-card:nth-child(5) { transform: translateX(72px) rotate(22deg) translateY(8px); z-index: 5; transform-origin: bottom center; }
+        .pro-card:hover {
+            transform: translateY(-24px) rotate(0deg) scale(1.15) !important;
+            z-index: 100 !important;
+            box-shadow: 0 15px 35px rgba(58, 134, 255, 0.7), 0 0 20px #fbbf24;
+            border: 2px solid #3a86ff;
+        }
+        .pro-card.red { color: #ef4444; }
+        .c-top { font-size: 0.7rem; line-height: 1; }
+        .c-mid { font-size: 1.1rem; text-align: center; align-self: center; }
+        .c-bot { font-size: 0.7rem; line-height: 1; align-self: flex-end; transform: rotate(180deg); }
     </style>
 </head>
 <body>
 <div class="phone">
     <div class="scan-line"></div>
 
-    <!-- HEADER -->
+    <!-- ===== HEADER ===== -->
     <header class="flex justify-between items-center bg-glass p-2 rounded-2xl border border-[#32235c]">
         <div class="flex items-center gap-2">
-            <div class="text-white font-bold text-sm">♛ Table 7</div>
-            <span class="text-xs text-gray-400">|</span>
-            <span class="text-gold-text text-xs font-bold">🎯 25/50</span>
+            <button class="text-white text-sm bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a] back-btn" onclick="playSound('exit')">←</button>
+            <span class="text-white font-bold text-sm">♛ Table 7</span>
+            <span class="text-xs text-gray">|</span>
+            <span class="text-gold text-xs font-bold">🎯 25/50</span>
         </div>
         <div class="flex items-center gap-2">
-            <button class="text-white text-xs bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]">⏱️ 15s</button>
-            <button class="text-white text-xs bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]">🚪</button>
+            <span class="text-white text-xs bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]">⏱️ 15s</span>
+            <button class="text-white text-xs bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a] back-btn" onclick="playSound('exit')">🚪</button>
         </div>
     </header>
 
-    <!-- SEATS ROW TOP -->
+    <!-- ===== SEATS TOP ===== -->
     <div class="flex justify-around mt-2">
         <div class="seat"><div class="avatar active-ring">👑</div><div class="name">Victor</div><div class="chips">12.5k</div></div>
         <div class="seat"><div class="avatar">🐺</div><div class="name">Lucius</div><div class="chips">10k</div></div>
         <div class="seat"><div class="avatar">🌹</div><div class="name">Isabelle</div><div class="chips">10k</div></div>
     </div>
 
-    <!-- TABLE -->
+    <!-- ===== TABLE ===== -->
     <div class="table-felt">
-        <div class="text-white text-xs font-bold">POT</div>
-        <div class="text-gold-text text-xl font-bold">2,400</div>
+        <span class="text-white text-[10px] font-bold">POT</span>
+        <span class="text-gold text-xl font-bold pot-display">2,400</span>
         <div class="flex gap-1 mt-1">
             <div class="card-slot back"></div>
             <div class="card-slot back"></div>
@@ -126,68 +126,80 @@
             <div class="card-slot"></div>
             <div class="card-slot"></div>
         </div>
-        <div class="text-gray-400 text-[10px] mt-1">♠ ♥ ♦ ♣</div>
-        <div class="flex gap-2 mt-1">
-            <span class="text-[10px] text-gray-400">Dealer: 👑</span>
-        </div>
+        <div class="text-gray text-[10px] mt-1">♠ ♥ ♦ ♣</div>
+        <div class="flex gap-2 mt-1"><span class="text-[10px] text-gray">Dealer: 👑</span></div>
     </div>
 
-    <!-- SEATS ROW BOTTOM -->
+    <!-- ===== SEATS BOTTOM ===== -->
     <div class="flex justify-around mt-1">
         <div class="seat"><div class="avatar active-ring">⚡</div><div class="name">Damien</div><div class="chips">10k</div></div>
         <div class="seat"><div class="avatar">💎</div><div class="name">Elena</div><div class="chips">10k</div></div>
         <div class="seat"><div class="avatar">🏴</div><div class="name">Jack</div><div class="chips">10k</div></div>
     </div>
 
-    <!-- YOUR CARDS & STATUS -->
-    <div class="bg-glass p-2 rounded-2xl border border-[#32235c] mt-2 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <span class="text-white text-xs font-bold">Your hand:</span>
-            <div class="card-slot">A♠</div>
-            <div class="card-slot">K♠</div>
+    <!-- ===== YOUR HAND (FAN-OUT) ===== -->
+    <div class="pro-hand-container">
+        <div class="flex justify-between w-full px-2 mb-1 items-center">
+            <span class="text-[10px] text-cyan-400 font-bold">🎯 Pro Grip</span>
+            <span class="text-[10px] text-amber-400 font-bold user-chips">💰 8,200</span>
         </div>
-        <div class="text-gold-text text-xs font-bold">💰 8,200</div>
+        <div class="cards-fan">
+            <div class="pro-card"><div class="c-top">A♠</div><div class="c-mid">♠</div><div class="c-bot">A♠</div></div>
+            <div class="pro-card"><div class="c-top">10♠</div><div class="c-mid">♠</div><div class="c-bot">10♠</div></div>
+            <div class="pro-card red"><div class="c-top">K♥</div><div class="c-mid">♥</div><div class="c-bot">K♥</div></div>
+            <div class="pro-card red"><div class="c-top">Q♦</div><div class="c-mid">♦</div><div class="c-bot">Q♦</div></div>
+            <div class="pro-card"><div class="c-top">J♣</div><div class="c-mid">♣</div><div class="c-bot">J♣</div></div>
+        </div>
     </div>
 
-    <!-- RAISE SLIDER -->
+    <!-- ===== RAISE SLIDER ===== -->
     <div class="bg-glass p-2 rounded-2xl border border-[#32235c] mt-2">
-        <div class="flex justify-between text-xs text-gray-400">
+        <div class="flex justify-between text-xs text-gray">
             <span>Raise</span>
-            <span class="gold-text">320</span>
+            <span class="text-gold">320</span>
         </div>
         <input type="range" min="0" max="1000" value="320" class="range-slider" />
-        <div class="flex justify-between text-[10px] text-gray-500">
-            <span>0</span>
-            <span>1,000</span>
-        </div>
+        <div class="flex justify-between text-[10px] text-gray-500"><span>0</span><span>1,000</span></div>
     </div>
 
-    <!-- ACTION BUTTONS -->
+    <!-- ===== ACTION BUTTONS ===== -->
     <div class="grid grid-cols-5 gap-2 mt-2">
-        <button class="btn-action btn-fold">Fold</button>
-        <button class="btn-action btn-check">Check</button>
-        <button class="btn-action btn-call">Call 25</button>
-        <button class="btn-action btn-raise">Raise</button>
-        <button class="btn-action btn-allin">All-in</button>
+        <button class="btn-action btn-fold" onclick="playSound('exit')">Fold</button>
+        <button class="btn-action btn-check" onclick="playSound('click')">Check</button>
+        <button class="btn-action btn-call" onclick="playSound('chips')">Call 25</button>
+        <button class="btn-action btn-raise" onclick="playSound('chips')">Raise</button>
+        <button class="btn-action btn-allin" onclick="playSound('win')">All-in</button>
     </div>
 
-    <!-- STATUS BAR -->
+    <!-- ===== STATUS ===== -->
     <div class="flex justify-between text-[10px] text-gray-500 mt-2 border-t border-[#1e1548] pt-2">
-        <span>👤 Your turn</span>
-        <span class="gold-text">⏱️ 12s</span>
-        <span class="text-gray-400">📊 Win % 67%</span>
+        <span class="text-white">👤 Your turn</span>
+        <span class="text-gold">⏱️ 12s</span>
+        <span class="text-gray">📊 Win % 67%</span>
     </div>
 
-    <!-- CHAT MINI -->
+    <!-- ===== CHAT ===== -->
     <div class="bg-[#161035] rounded-2xl p-2 border border-[#32235c] mt-2 flex gap-2">
         <input type="text" placeholder="Type a message..." class="flex-1 bg-transparent text-white text-xs outline-none placeholder-gray-500" />
-        <button class="text-gold-text text-xs font-bold">Send</button>
+        <button class="text-gold text-xs font-bold" onclick="playSound('click')">Send</button>
     </div>
 
-    <!-- ASK ME -->
-    <button class="absolute bottom-4 right-4 bg-[#1f1545] border border-[#fbbf24] text-gold-text text-xs px-3 py-1 rounded-full shadow-lg">
-        ❓ Ask Me
-    </button>
+    <!-- ===== ASK ME ===== -->
+    <button class="absolute bottom-4 right-4 bg-[#db2777] text-white text-xs px-3 py-1.5 rounded-full shadow-lg font-bold hover:bg-[#c0266a] transition ask-me-btn" onclick="playSound('click')">❓ Ask Me</button>
 </div>
+<script>
+    function playSound(type) {
+        const sounds = {
+            click: 'https://www.soundjay.com/button/button-09.mp3',
+            deal: 'https://www.soundjay.com/misc/card-shuffle-1.mp3',
+            chips: 'https://www.soundjay.com/misc/coins-1.mp3',
+            win: 'https://www.soundjay.com/misc/success-1.mp3',
+            exit: 'https://www.soundjay.com/misc/click-01.mp3'
+        };
+        const audio = new Audio(sounds[type] || sounds.click);
+        audio.play().catch(() => {});
+    }
+</script>
+<script src="app.js"></script>
 </body>
 </html>
