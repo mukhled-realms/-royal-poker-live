@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Royal Poker – Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Inter:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        body {
+            background: #0b0719;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            padding: 10px;
+        }
+        .phone {
+            max-width: 420px;
+            width: 100%;
+            background: radial-gradient(circle at 50% 0%, #1e1340, #0a0718 80%);
+            border-radius: 36px;
+            border: 2px solid #3b2a6b;
+            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.9), inset 0 0 60px rgba(139,92,246,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 16px 12px 16px;
+            min-height: 780px;
+            position: relative;
+        }
+        .gold-text { color: #fbbf24; }
+        .bg-glass { background: rgba(16,8,36,0.7); backdrop-filter: blur(6px); }
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #1e1548;
+        }
+        .setting-row .left .title { color: #fff; font-size: 14px; font-weight: 600; }
+        .setting-row .left .desc { color: #5b4b7a; font-size: 11px; }
+        .toggle {
+            width: 44px;
+            height: 24px;
+            background: #1f1545;
+            border-radius: 40px;
+            border: 1px solid #4b3a7a;
+            position: relative;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .toggle.active { background: #fbbf24; border-color: #fbbf24; }
+        .toggle .knob {
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: 0.2s;
+        }
+        .toggle.active .knob { left: 22px; background: #0b0719; }
+        .btn-danger {
+            background: transparent;
+            border: 1px solid #7f1d1d;
+            color: #fca5a5;
+            border-radius: 40px;
+            padding: 8px 16px;
+            font-weight: 600;
+            transition: 0.15s;
+            cursor: pointer;
+        }
+        .btn-danger:active { background: #7f1d1d; color: #fff; }
+        .scan-line {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, #a855f7, transparent);
+            opacity: 0.3;
+            animation: scanMove 4s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
+    </style>
+</head>
+<body>
+<div class="phone">
+    <div class="scan-line"></div>
+
+    <!-- HEADER -->
+    <header class="flex justify-between items-center bg-glass p-3 rounded-2xl border border-[#32235c]">
+        <div class="flex items-center gap-2">
+            <button class="text-white text-sm bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#4b3a7a]">←</button>
+            <span class="text-white font-bold text-sm">⚙️ Settings</span>
+        </div>
+        <button class="text-gold-text text-xs bg-[#2a1d5a] px-3 py-1 rounded-full border border-[#fbbf24]">💾 Save</button>
+    </header>
+
+    <!-- SOUND -->
+    <div class="mt-4">
+        <span class="text-gray-400 text-xs font-semibold uppercase tracking-wider">Sound</span>
+        <div class="setting-row">
+            <div class="left"><div class="title">🔊 Music</div><div class="desc">Background music during gameplay</div></div>
+            <div class="toggle active" onclick="this.classList.toggle('active')"><div class="knob"></div></div>
+        </div>
+        <div class="setting-row">
+            <div class="left"><div class="title">🎵 Sound Effects</div><div class="desc">Card shuffle, chips, deal sounds</div></div>
+            <div class="toggle active" onclick="this.classList.toggle('active')"><div class="knob"></div></div>
+        </div>
+        <div class="setting-row">
+            <div class="left"><div class="title">🎤 Voice Chat</div><div class="desc">Voice communication at the table</div></div>
+            <div class="toggle" onclick="this.classList.toggle('active')"><div class="knob"></div></div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div class="mt-2">
+        <span class="text-gray-400 text-xs font-semibold uppercase tracking-wider">Notifications</span>
+        <div class="setting-row">
+            <div class="left"><div class="title">🔔 Push Notifications</div><div class="desc">Alerts for game invites and updates</div></div>
+            <div class="toggle active" onclick="this.classList.toggle('active')"><div class="knob"></div></div>
+        </div>
+        <div class="setting-row">
+            <div class="left"><div class="title">💬 Chat Mentions</div><div class="desc">Notify when mentioned in chat</div></div>
+            <div class="toggle" onclick="this.classList.toggle('active')"><div class="knob"></div></div>
+        </div>
+    </div>
+
+    <!-- DISPLAY -->
+    <div class="mt-2">
+        <span class="text-gray-400 text-xs font-semibold uppercase tracking-wider">Display</span>
+        <div class="setting-row">
+            <div class="left"><div class="title">🌙 Dark Mode</div><div class="desc">Dark theme for the app</div></div>
+            <div class="toggle active" onclick="this.classList.toggle('active')"><div class="knob"></div></div>
+        </div>
+        <div class="setting-row">
+            <div class="left"><div class="title">🎨 Animations</div><div class="desc">Card flips, transitions, effects</div></div>
+            <div class="toggle active" onclick="this.classList.toggle('active')"><div class="knob"></div></div>
+        </div>
+    </div>
+
+    <!-- LANGUAGE -->
+    <div class="mt-2">
+        <span class="text-gray-400 text-xs font-semibold uppercase tracking-wider">Language</span>
+        <div class="setting-row">
+            <div class="left"><div class="title">🌐 Language</div><div class="desc">English (default)</div></div>
+            <span class="text-gold-text text-sm font-semibold">EN ▼</span>
+        </div>
+    </div>
+
+    <!-- ACCOUNT -->
+    <div class="mt-2">
+        <span class="text-gray-400 text-xs font-semibold uppercase tracking-wider">Account</span>
+        <div class="setting-row">
+            <div class="left"><div class="title">🔑 Change Password</div><div class="desc">Update your login credentials</div></div>
+            <span class="text-gold-text text-sm font-semibold">→</span>
+        </div>
+        <div class="setting-row">
+            <div class="left"><div class="title">📤 Export Data</div><div class="desc">Download your game data (JSON)</div></div>
+            <span class="text-gold-text text-sm font-semibold">↓</span>
+        </div>
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div class="mt-2">
+        <span class="text-red-500 text-xs font-semibold uppercase tracking-wider">Danger Zone</span>
+        <div class="setting-row border-b-0">
+            <div class="left"><div class="title text-red-400">🚪 Log Out</div><div class="desc">Sign out of your account</div></div>
+            <button class="btn-danger text-sm">Log Out</button>
+        </div>
+        <div class="setting-row border-b-0">
+            <div class="left"><div class="title text-red-400">🗑️ Delete Account</div><div class="desc">Permanently remove your account</div></div>
+            <button class="btn-danger text-sm">Delete</button>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="flex justify-around bg-[#161035] rounded-2xl border border-[#32235c] p-2 mt-3">
+        <button class="text-gray-400 text-xs">🏠 Lobby</button>
+        <button class="text-gray-400 text-xs">🛒 Shop</button>
+        <button class="text-gray-400 text-xs">👤 Profile</button>
+        <button class="text-gold-text text-xs border-b-2 border-[#fbbf24]">⚙️ Settings</button>
+    </div>
+
+    <!-- ASK ME -->
+    <button class="absolute bottom-4 right-4 bg-[#1f1545] border border-[#fbbf24] text-gold-text text-xs px-3 py-1 rounded-full shadow-lg">
+        ❓ Ask Me
+    </button>
+</div>
+</body>
+</html>
